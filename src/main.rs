@@ -12,7 +12,7 @@ fn main() {
 
     if args.len() < 3 {
         eprintln!(
-            "ERR: Invalid syntax! Usage: {} [output_file] [should_export_time]",
+            "Invalid syntax! Usage: {} [output_file] [should_export_time]",
             args[0]
         );
         std::process::exit(1);
@@ -31,18 +31,18 @@ fn main() {
         .create(true)
         .append(true)
         .open(output_file_path)
-        .expect("ERR: Failed to open output file!");
+        .expect("Failed to open output file!");
 
     let mut clipboard: ClipboardContext =
-        ClipboardProvider::new().expect("ERR: Failed to create ClipboardProvider!");
+        ClipboardProvider::new().expect("Failed to create ClipboardProvider!");
     let mut prev_content = clipboard
         .get_contents()
-        .expect("ERR: Failed to get initial clipboard contents!");
+        .expect("Failed to get initial clipboard contents!");
 
     loop {
         let current_content = clipboard
             .get_contents()
-            .expect("ERR: Failed to get clipboard content in loop!");
+            .expect("Failed to get clipboard content in loop!");
 
         if current_content != prev_content {
             prev_content = current_content.clone();
@@ -64,7 +64,7 @@ fn main() {
             current_content += "\n";
             output_file
                 .write_all(current_content.as_bytes())
-                .expect("ERR: Failed to write to output file!");
+                .expect("Failed to write to output file!");
         }
 
         std::thread::sleep(Duration::from_millis(50));
